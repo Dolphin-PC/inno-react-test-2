@@ -1,6 +1,7 @@
 ### [과제] 숙련주차 과제 답
 
-## 1. 추가하기 버튼을 클릭해도 추가한 아이템이 화면에 표시되지 않음.
+<details>
+<summary>1. 추가하기 버튼을 클릭해도 추가한 아이템이 화면에 표시되지 않음.</summary>
 
 ### 원인
 
@@ -18,22 +19,8 @@ const Form = () => {
 
   const dispatch = useDispatch();
 
-  const [todo, setTodo] = useState({
-    id: 0,
-    title: "",
-    body: "",
-    isDone: false,
-  });
-
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
-    setTodo({ ...todo, [name]: value });
-  };
-
   const onSubmitHandler = (event) => {
-    event.preventDefault();
-    if (todo.title.trim() === "" || todo.body.trim() === "") return;
-
+    ...
     const payload = {
       id: id,
       title: todo.title,
@@ -41,20 +28,15 @@ const Form = () => {
       isDone: false,
     };
     dispatch(addTodo(payload));
-
-    setTodo({
-      id: 0,
-      title: "",
-      body: "",
-      isDone: false,
-    });
-  };
-
+  }
   ...
 }
 ```
 
-## 2. 추가하기 버튼 클릭 후 기존에 존재하던 아이템들이 사라짐.
+</details>
+
+<details>
+<summary>2. 추가하기 버튼 클릭 후 기존에 존재하던 아이템들이 사라짐.</summary>
 
 ### 원인
 
@@ -84,7 +66,10 @@ case ADD_TODO:
     };
 ```
 
-## 3. 삭제 기능이 동작하지 않음.
+</details>
+
+<details>
+<summary>3. 삭제 기능이 동작하지 않음.</summary>
 
 ### 원인
 
@@ -126,7 +111,10 @@ const todos = (state = initialState, action) => {
 };
 ```
 
-## 4. 상세 페이지에 진입 하였을 때 데이터가 업데이트 되지 않음.
+</details>
+
+<details>
+<summary>4. 상세 페이지에 진입 하였을 때 데이터가 업데이트 되지 않음.</summary>
 
 ### 원인
 
@@ -179,7 +167,10 @@ const Detail = () => {
 }
 ```
 
-## 5. 완료된 카드의 상세 페이지에 진입 하였을 때 올바른 데이터를 불러오지 못함.
+</details>
+
+<details>
+<summary>5. 완료된 카드의 상세 페이지에 진입 하였을 때 올바른 데이터를 불러오지 못함.</summary>
 
 ### 원인
 
@@ -209,8 +200,6 @@ const List = () => {
 
 ### 해결
 
-### 원인
-
 1. `상세보기 (StLink)`의 path 변경 => ${todo.id}
 
 ```jsx
@@ -235,7 +224,10 @@ const List = () => {
 };
 ```
 
-## 6. 취소 버튼 클릭시 기능이 작동하지 않음.
+</details>
+
+<details>
+<summary>6. 취소 버튼 클릭시 기능이 작동하지 않음.</summary>
 
 ### 원인
 
@@ -319,3 +311,12 @@ const List = () => {
   );
 };
 ```
+
+</details>
+
+<details>
+<summary>7. 과제를 마쳤다면 배포도 한번 해볼까요?</summary>
+
+### https://inno-react-test-2.vercel.app/
+
+</details>

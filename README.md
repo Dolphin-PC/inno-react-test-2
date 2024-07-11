@@ -234,3 +234,88 @@ const List = () => {
   );
 };
 ```
+
+## 6. 취소 버튼 클릭시 기능이 작동하지 않음.
+
+### 원인
+
+1. 상태값의 변화를 실행하는 `onToggleStatusTodo`함수는 `todo.id`을 통해 특정 todo의 `isDone`을 반전시키고 있음
+
+```js
+// src/redux/modules/todos.js
+
+case TOGGLE_STATUS_TODO:
+    return {
+        ...state,
+        todos: state.todos.map((todo) => {
+            if (todo.id === action.payload) {
+                return {
+                    ...todo,
+                    isDone: !todo.isDone,
+                };
+            } else {
+            return todo;
+            }
+        }),
+    ...
+    };
+```
+
+2. List.jsx에서의 [완료/취소] 버튼에 onClick에 할당된 `onToggleStatusTodo`함수에 `todo.id 매개변수`가 누락되어 있음
+
+```jsx
+// List.jsx
+
+const List = () => {
+  ...
+  return (
+      <h2>Working.. 🔥</h2>
+      ...
+        <StButton
+            borderColor="green"
+            onClick={() => onToggleStatusTodo(todo.id)}
+            >
+            {todo.isDone ? "취소!" : "완료!"}
+        </StButton>
+      ...
+      <h2 className="list-title">Done..! 🎉</h2>
+      ...
+        <StButton borderColor="green" onClick={onToggleStatusTodo}>
+            {todo.isDone ? "취소!" : "완료!"}
+        </StButton>
+      ...
+  );
+};
+```
+
+### 해결
+
+1. [취소] 버튼의 onClick에 할당된 `onToggleStatusTodo`함수에 `todo.id 매개변수` 전달
+
+```jsx
+// List.jsx
+
+const List = () => {
+  ...
+  return (
+      <h2>Working.. 🔥</h2>
+      ...
+        <StButton
+            borderColor="green"
+            onClick={() => onToggleStatusTodo(todo.id)}
+            >
+            {todo.isDone ? "취소!" : "완료!"}
+        </StButton>
+      ...
+      <h2 className="list-title">Done..! 🎉</h2>
+      ...
+        <StButton
+            borderColor="green"
+            onClick={() => onToggleStatusTodo(todo.id)}
+            >
+            {todo.isDone ? "취소!" : "완료!"}
+        </StButton>
+      ...
+  );
+};
+```

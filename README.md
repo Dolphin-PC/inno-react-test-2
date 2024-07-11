@@ -113,11 +113,13 @@ const todos = (state = initialState, action) => {
 // src/redux/modules/todos.js
 const todos = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TODO: ...
-
-    case TOGGLE_STATUS_TODO: ...
-
-    case GET_TODO_BY_ID: ...
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => {
+          return todo.id !== action.payload;
+        }),
+      };
     default:
       return state;
   }

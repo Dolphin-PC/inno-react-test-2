@@ -125,3 +125,56 @@ const todos = (state = initialState, action) => {
   }
 };
 ```
+
+## 4. 상세 페이지에 진입 하였을 때 데이터가 업데이트 되지 않음.
+
+### 원인
+
+1. Detail.jsx에서 참조하고 있는 `todo`는, `todos` store내부의 `todo`를 참고하고 있음
+
+```jsx
+// Detail.jsx
+const todo = useSelector((state) => state.todos.todo);
+```
+
+```js
+// src/redux/modules/todos.js
+const initialState = {
+  todos: [
+    {
+      id: "1",
+      title: "리액트",
+      body: "리액트를 배워봅시다",
+      isDone: false,
+    },
+  ],
+  todo: {
+    id: "0",
+    title: "",
+    body: "",
+    isDone: false,
+  },
+};
+```
+
+### 해결
+
+1. Detail에서 참조하고 있는 `todo`값을 업데이트하기 위해서는, `GET_TODO_BY_ID` reducer를 실행하여 `todo`객체를 업데이트 해야함
+
+```jsx
+// Detail.jsx
+
+const Detail = () => {
+  const dispatch = useDispatch();
+  const todo = useSelector((state) => state.todos.todo);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getTodoByID(id));
+  }, []);
+
+  ...
+}
+```

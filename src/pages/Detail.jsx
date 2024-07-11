@@ -11,6 +11,10 @@ const Detail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(getTodoByID(id));
+  }, []);
+
   return (
     <StContainer>
       <StDialog>

@@ -178,3 +178,59 @@ const Detail = () => {
   ...
 }
 ```
+
+## 5. 완료된 카드의 상세 페이지에 진입 하였을 때 올바른 데이터를 불러오지 못함.
+
+### 원인
+
+1. isDone에 따라 render되는 `상세보기 (StLink)`의 path가 잘못 설정되어 있음.
+
+```jsx
+// List.jsx
+
+const List = () => {
+  ...
+  return (
+      <h2>Working.. 🔥</h2>
+      ...
+         <StLink to={`/${todo.id}`} key={todo.id}>
+           <div>상세보기</div>
+         </StLink>
+      ...
+      <h2 className="list-title">Done..! 🎉</h2>
+      ...
+         <StLink to={`/${index}`} key={todo.id}>
+           <div>상세보기</div>
+         </StLink>
+      ...
+  );
+};
+```
+
+### 해결
+
+### 원인
+
+1. `상세보기 (StLink)`의 path 변경 => ${todo.id}
+
+```jsx
+// List.jsx
+
+const List = () => {
+  ...
+  return (
+      <h2>Working.. 🔥</h2>
+      ...
+         <StLink to={`/${todo.id}`} key={todo.id}>
+           <div>상세보기</div>
+         </StLink>
+      ...
+      <h2 className="list-title">Done..! 🎉</h2>
+      ...
+         <StLink to={`/${todo.id}`} key={todo.id}>
+           <div>상세보기</div>
+         </StLink>
+      ...
+  );
+};
+```

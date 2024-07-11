@@ -58,7 +58,7 @@ const List = () => {
           if (todo.isDone) {
             return (
               <StTodoContainer key={todo.id}>
-                <StLink to={`/${index}`} key={todo.id}>
+                <StLink to={`/${todo.id}`} key={todo.id}>
                   <div>상세보기</div>
                 </StLink>
                 <div>
@@ -72,10 +72,7 @@ const List = () => {
                   >
                     삭제하기
                   </StButton>
-                  <StButton
-                    borderColor="green"
-                    onClick={onToggleStatusTodo}
-                  >
+                  <StButton borderColor="green" onClick={onToggleStatusTodo}>
                     {todo.isDone ? "취소!" : "완료!"}
                   </StButton>
                 </StDialogFooter>
